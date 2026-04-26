@@ -190,10 +190,14 @@ document.addEventListener("DOMContentLoaded", () => {
             zoomContainer.style.height = '1500vh';
         }
         
-        // 2. Reveal the bottom Gallery 3D section so we can scroll to it
+        // 2. Reveal the bottom Gallery 3D section and new Cycle sequence so we can scroll to them
         const gallery3d = document.getElementById('gallery-3d');
         if (gallery3d) {
             gallery3d.style.display = 'flex'; // Uses flex for the 3D centering
+        }
+        const cycleScrollContainer = document.getElementById('cycle-scroll-container');
+        if (cycleScrollContainer) {
+            cycleScrollContainer.style.display = 'block';
         }
 
         // 2. Stop static
@@ -229,6 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
         screenVideo.pause();
         screenVideo.currentTime = 0; // Reset video to start
         screenVideo.style.opacity = '0';
+        
+        const cycleScrollContainer = document.getElementById('cycle-scroll-container');
+        if (cycleScrollContainer) {
+            cycleScrollContainer.style.display = 'none';
+        }
 
         canvas.style.display = 'block';
         drawStatic(); // Restart the static TV noise
@@ -644,7 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Clean up dynamically injected inline styles from scroll animations so they don't break the structure on reload
-            const animatedElements = htmlClone.querySelectorAll('#zoom-container, #sticky-section, .spring-switch-wrapper, #switch-cord, #dissolve-frame, #sequence-canvas, #cinematic-titles, .titles-heading, .titles-list li, #zoom-target, #monitor-screen, #static-canvas, #screen-video, #crt-overlay, .gallery-3d');
+            const animatedElements = htmlClone.querySelectorAll('#zoom-container, #sticky-section, .spring-switch-wrapper, #switch-cord, #dissolve-frame, #sequence-canvas, #cinematic-titles, .titles-heading, .titles-list li, #zoom-target, #monitor-screen, #static-canvas, #screen-video, #crt-overlay, .gallery-3d, #cycle-scroll-container, #cycle-sticky-section, #cycle-canvas');
             animatedElements.forEach(el => {
                 el.removeAttribute('style');
             });
@@ -679,4 +688,68 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error("Server error. Is node server.js running on port 3000?", err));
         }
     });
+    // --- CYCLE ANIMATION LOGIC ---
+    const cycleCanvas = document.getElementById('cycle-canvas');
+    const cycleCtx = cycleCanvas ? cycleCanvas.getContext('2d') : null;
+    const cycleScrollContainer = document.getElementById('cycle-scroll-container');
+    const CYCLE_FRAME_COUNT = 127;
+    const cycleImages = [];
+    let cycleImagesLoaded = 0;
+
+    if (cycleCanvas && cycleScrollContainer) {
+        // High resolution static to prevent grainy stretch
+        cycleCanvas.width = 1920;
+        cycleCanvas.height = 1080;
+
+        // Preload frames
+        for (let i = 1; i <= CYCLE_FRAME_COUNT; i++) {
+            const img = new Image();
+            const frameIndex = i.toString().padStart(3, '0');
+            img.src = `images/cycle_ani/monitordisplay_20260426_184449_0000_${frameIndex}.png`;
+            img.onload = () => {
+                cycleImagesLoaded++;
+                // Draw first frame once loaded
+                if (i === 1 && cycleCtx) {
+                    cycleCtx.drawImage(img, 0, 0, cycleCanvas.width, cycleCanvas.height);
+                }
+            };
+            cycleImages.push(img);
+        }
+
+        let cycleTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!isMonitorOn || !cycleScrollContainer) return;
+
+            if (!cycleTicking) {
+                window.requestAnimationFrame(() => {
+                    const rect = cycleScrollContainer.getBoundingClientRect();
+                    // rect.top is 0 when container hits the top of viewport.
+                    // We have 400vh total, viewport is 100vh. Scrollable distance = 300vh.
+                    const scrollDistance = -rect.top;
+                    const maxScroll = window.innerHeight * 3;
+
+                    if (scrollDistance >= 0 && scrollDistance <= maxScroll) {
+                        const progress = scrollDistance / maxScroll;
+                        const frameIndex = Math.floor(progress * (CYCLE_FRAME_COUNT - 1));
+
+                        if (cycleCtx && cycleImages[frameIndex] && cycleImages[frameIndex].complete) {
+                            cycleCtx.drawImage(cycleImages[frameIndex], 0, 0, cycleCanvas.width, cycleCanvas.height);
+                        }
+                    } else if (scrollDistance < 0) {
+                        // Before container
+                        if (cycleCtx && cycleImages[0] && cycleImages[0].complete) {
+                            cycleCtx.drawImage(cycleImages[0], 0, 0, cycleCanvas.width, cycleCanvas.height);
+                        }
+                    } else if (scrollDistance > maxScroll) {
+                        // After container
+                        if (cycleCtx && cycleImages[CYCLE_FRAME_COUNT - 1] && cycleImages[CYCLE_FRAME_COUNT - 1].complete) {
+                            cycleCtx.drawImage(cycleImages[CYCLE_FRAME_COUNT - 1], 0, 0, cycleCanvas.width, cycleCanvas.height);
+                        }
+                    }
+                    cycleTicking = false;
+                });
+                cycleTicking = true;
+            }
+        });
+    }
 });
