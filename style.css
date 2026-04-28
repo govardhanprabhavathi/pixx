@@ -76,6 +76,516 @@ body {
     /* Drops down seamlessly with the text */
 }
 
+<<<<<<< HEAD
+=======
+/* Stacking effect: Sticky wrapper */
+.hero-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+    /* Dotted background on the bottom most layer */
+    background-color: var(--white);
+    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+    background-size: 15px 15px;
+    background-position: center;
+}
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+    position: relative;
+}
+
+/* ========================================= */
+/* BACKGROUND GRADIENTS (NEON GREEN SHADES)  */
+/* ========================================= */
+
+.top-gradients-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85vh;
+    /* Reaches down behind the hero but fades out */
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    display: none;
+    /* User disabled for now */
+    /* Soft fade perfectly to white at the bottom */
+    mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    background: transparent;
+    /* No dark color, fades purely into var(--white) */
+}
+
+/* Add shiny glass reflection overlay */
+.noise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Replaced grainy shade with a shiny glass finish */
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.4) 100%);
+    mix-blend-mode: screen;
+    /* Boosts the bright shiny highlights dynamically over the colors */
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Gradient Blobs that flow and drop waves */
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.9;
+    animation: flowWave 4s infinite alternate ease-in-out;
+    /* Accelerated native speed securely mapping request */
+}
+
+.blob-1 {
+    top: -150px;
+    left: -10%;
+    width: 70vw;
+    height: 500px;
+    background: #4ade80;
+    /* Deep vibrant green */
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    top: -200px;
+    left: 20%;
+    width: 60vw;
+    height: 600px;
+    background: #b7ff70;
+    /* Neon green (Pixcross main theme) */
+    animation-delay: -3s;
+    animation-duration: 7s;
+    /* Offset fluid speed */
+}
+
+.blob-3 {
+    top: -100px;
+    right: -10%;
+    width: 60vw;
+    height: 500px;
+    background: #86efac;
+    /* Bright light green */
+    animation-delay: -5s;
+    opacity: 0.6;
+}
+
+.blob-4 {
+    top: -180px;
+    left: 50%;
+    width: 70vw;
+    height: 550px;
+    background: #22c55e;
+    /* Rich lime green */
+    animation-delay: -2s;
+}
+
+/* Drops waves downwards randomly */
+.blob-5 {
+    top: -50px;
+    left: 35%;
+    width: 40vw;
+    height: 400px;
+    background: #d9f99d;
+    /* Pale mint green */
+    animation: dropWaves 1.5s infinite alternate ease-in-out;
+    /* Increased vertical drop speed heavily */
+}
+
+@keyframes flowWave {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(140px, -80px) scale(1.15) rotate(15deg);
+    }
+
+    66% {
+        transform: translate(-100px, 100px) scale(0.85) rotate(-10deg);
+    }
+
+    100% {
+        transform: translate(80px, -50px) scale(1.1) rotate(8deg);
+    }
+}
+
+@keyframes dropWaves {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(180px) scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+/* Top brand text to match the provided image */
+.header-text {
+    position: relative;
+    /* Required to activate z-index */
+    margin-top: calc(4rem - 60px);
+    text-align: center;
+    z-index: 5;
+}
+
+.brand-title {
+    font-size: 6.5rem;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.brand-subtitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-top: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+/* Large central logo */
+.hero-logo {
+    position: relative;
+    /* Required to activate z-index */
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    margin-top: -8rem;
+    margin-left: 4rem;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Strong white up fade overlay */
+.white-fade {
+    position: absolute;
+    bottom: -5px;
+    /* Ensures no gap at the bottom */
+    left: 0;
+    width: 100%;
+    height: 60%;
+    /* Gradient from solid white at bottom to transparent at top */
+    background: linear-gradient(to top,
+            rgba(255, 255, 255, 1) 35%,
+            rgba(255, 255, 255, 0.8) 55%,
+            rgba(255, 255, 255, 0) 100%);
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+/* Content container placed inside the white fade region */
+.fade-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 3.5rem;
+    z-index: 20;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 2rem;
+    /* Valid padding to keep them away from the screen edges */
+    margin-bottom: 1rem;
+    /* Reduced from 3rem to push the buttons further down */
+}
+
+.btn {
+    background-color: var(--dark);
+    color: var(--white);
+    border: 2px solid var(--dark);
+    padding: 0.9rem 1.8rem;
+    border-radius: 9999px;
+    /* Fully rounded */
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--white);
+    color: var(--dark);
+}
+
+/* Carousel Section */
+.trusted-section {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+}
+
+.trusted-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 1.2rem;
+}
+
+.carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    /* Side fades for the carousel */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.carousel-track {
+    display: inline-flex;
+    animation: scroll 25s linear infinite;
+    align-items: center;
+}
+
+.carousel-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--dark);
+    opacity: 0.6;
+    margin: 0 3rem;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Second Section (White with grid) */
+.second-section {
+    position: relative;
+    z-index: 2;
+    /* Stacks on top of sticky hero wrapper */
+    background-color: var(--white);
+    min-height: 100vh;
+    border-radius: 0 0 0 0;
+    /* Small grid pattern with low opacity */
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.08);
+    padding: 8rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Contains the blurry blobs */
+}
+
+/* Green blurry blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    /* Behind the content, but above the background grid */
+    opacity: 0.7;
+    transition: transform 15s ease-in-out;
+}
+
+.blob-1 {
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(134, 214, 54, 0.45) 0%, rgba(183, 255, 112, 0) 70%);
+    top: -10%;
+    right: 5%;
+    filter: blur(30px);
+}
+
+.blob-2 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(183, 255, 112, 0.25) 0%, rgba(183, 255, 112, 0) 70%);
+    bottom: -5%;
+    left: -5%;
+    filter: blur(20px);
+}
+
+@keyframes float-1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(60px, 40px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-40px, 80px) scale(0.95);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes float-2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(-50px, -60px) scale(0.95);
+    }
+
+    66% {
+        transform: translate(30px, -90px) scale(1.05);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+/* Container */
+.second-container {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+/* Text Side */
+.text-content {
+    flex: 1.2;
+    max-width: 700px;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.main-heading {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+    margin: 0;
+    position: absolute;
+    top: 1rem;
+    /* Moved up as per mockup */
+    left: 0;
+}
+
+/* Scroll Fill Effect */
+.scroll-fill-container {
+    position: relative;
+}
+
+.scroll-fill-text {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0;
+    top: 2rem;
+    letter-spacing: -0.01em;
+    color: #cccccc;
+    /* Base light grey */
+    transition: color 0.2s ease;
+}
+
+.scroll-fill-text span {
+    transition: color 0.1s ease;
+}
+
+.scroll-fill-text span.filled {
+    color: #1e1e1e;
+    /* Final dark color */
+}
+
+/* Roll Up Footer */
+.roll-up-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 4rem;
+}
+
+.roll-up-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin: 0;
+    overflow: hidden;
+    /* For the word slide up */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+}
+
+.roll-up-text.highlight {
+    color: var(--light-green);
+    font-size: 1.5rem;
+    line-height: 1;
+
+}
+
+
+
+.roll-up-word {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.roll-up-text.active .roll-up-word {
+    transform: translateY(0);
+}
+
+/* Image Side */
+.image-content {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.desk-img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    object-fit: contain;
+    transform: scale(0.85) translateY(-30px);
+    /* Scaled down and moved up 30px */
+    transform-origin: right center;
+}
+
+>>>>>>> 5ac569836933ada88c675744ba0c2f64fbb50ad5
 /* Zoom Scroll Mechanics */
 /* ========================================= */
 /* ZOOM SCROLL MECHANICS                     */
@@ -755,6 +1265,7 @@ body {
 .cycle-scroll-container {
     position: relative;
     width: 100%;
+<<<<<<< HEAD
     height: 400vh;
     /* 4x height for 127 frames of smooth scrolling */
     background-color: #000;
@@ -767,6 +1278,15 @@ body {
 /* ========================================= */
 /* CYCLE ANIMATION SECTION                   */
 /* ========================================= */
+=======
+    height: 400vh; /* 4x height for 127 frames of smooth scrolling */
+    background-color: #000; /* Assuming black background for transition, adjust if needed */
+    z-index: 5;
+    /* Hidden initially until monitor turns on, similar to gallery-3d */
+    display: none; 
+}
+
+>>>>>>> 5ac569836933ada88c675744ba0c2f64fbb50ad5
 .cycle-sticky-section {
     position: sticky;
     top: 0;
@@ -782,6 +1302,7 @@ body {
 .cycle-canvas {
     width: 100%;
     height: 100%;
+<<<<<<< HEAD
     object-fit: cover;
     /* Ensures the frame covers the entire screen perfectly */
     pointer-events: none;
@@ -1269,4 +1790,9 @@ body {
 .motto-footer-new.visible {
     opacity: 1;
     transform: translateY(0);
+=======
+    object-fit: cover; /* Ensures the frame covers the entire screen perfectly */
+    pointer-events: none; /* Let scroll pass through */
+    will-change: transform, opacity;
+>>>>>>> 5ac569836933ada88c675744ba0c2f64fbb50ad5
 }
