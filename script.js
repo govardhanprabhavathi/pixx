@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const switchWrapper = document.querySelector('.spring-switch-wrapper');
 
     // --- Sequence Animation Preloader ---
-    const FRAME_COUNT = 118; // Updated to match the shortened folder sequence
+    const FRAME_COUNT = 100; // Updated to match the shortened folder sequence
     const sequenceImages = [];
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
@@ -217,15 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function turnOnMonitor() {
         isMonitorOn = true;
 
-        // 1. Unlock the scroll container height natively (1500vh total)
+        // 1. Unlock the scroll container height natively (1300vh total)
         if (zoomContainer) {
-            zoomContainer.style.height = '1500vh';
+            zoomContainer.style.height = '1300vh';
         }
         
         // 2. Reveal the bottom Gallery 3D section and new Cycle sequence so we can scroll to them
-        const gallery3d = document.getElementById('gallery-3d');
-        if (gallery3d) {
-            gallery3d.style.display = 'flex'; // Uses flex for the 3D centering
+        const testimonials = document.querySelector('.testimonials');
+        if (testimonials) {
+            testimonials.style.display = 'block'; 
         }
         const cycleScrollContainer = document.getElementById('cycle-scroll-container');
         if (cycleScrollContainer) {
@@ -269,6 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const cycleScrollContainer = document.getElementById('cycle-scroll-container');
         if (cycleScrollContainer) {
             cycleScrollContainer.style.display = 'none';
+        }
+
+        const testimonials = document.querySelector('.testimonials');
+        if (testimonials) {
+            testimonials.style.display = 'none';
         }
 
         canvas.style.display = 'block';
@@ -439,6 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     
                                     titleLines[i].style.opacity = lineProgress;
                                     titleLines[i].style.transform = `translateY(${(1 - lineProgress) * 50}px)`;
+                                    titleLines[i].style.pointerEvents = lineProgress > 0.5 ? 'auto' : 'none';
                                 }
                             }
                         } else {
@@ -447,6 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             titleLines.forEach((line) => {
                                 line.style.opacity = '0';
                                 line.style.transform = `translateY(50px)`;
+                                line.style.pointerEvents = 'none';
                             });
                         }
                         
@@ -549,79 +556,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => moveBlobRandomly(blob), Math.random() * 2000);
     });
 
-    // --- 5. INFINITY DRAG CAROUSEL LOGIC ---
-    const track = document.getElementById('carousel-track'); // The ID is still carousel-track
-    const container = document.getElementById('work-carousel'); // ID is work-carousel
-    
-    if (track && container) {
-        let isDownCaro = false;
-        let startXCaro;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        
-        let autoScrollSpeed = 1; // Pixels per frame
-        let isDraggingCaro = false;
-        
-        // Ensure images are loaded before calculating width
-        // But for a flex container, scrollWidth works fine if we just divide by 2 since it's perfectly duplicated.
-        function getHalfWidth() {
-            // Half the total width is exactly the width of one set of 5 images + their gaps
-            return track.scrollWidth / 2;
-        }
-
-        function animateCarousel() {
-            if (!isDraggingCaro) {
-                currentTranslate -= autoScrollSpeed;
-            }
-
-            const halfWidth = getHalfWidth();
-            // Seamless wrap condition
-            if (currentTranslate <= -halfWidth) {
-                currentTranslate += halfWidth;
-                prevTranslate += halfWidth; // Keep drag offset in sync if user grabs right at the boundary
-            } else if (currentTranslate > 0) {
-                currentTranslate -= halfWidth;
-                prevTranslate -= halfWidth;
-            }
-
-            track.style.transform = `translateX(${currentTranslate}px)`;
-            requestAnimationFrame(animateCarousel);
-        }
-        
-        animateCarousel();
-
-        // Drag Handlers
-        container.addEventListener('pointerdown', (e) => {
-            isDownCaro = true;
-            isDraggingCaro = true;
-            startXCaro = e.pageX;
-            prevTranslate = currentTranslate;
-            container.style.cursor = 'grabbing';
-        });
-
-        window.addEventListener('pointerup', () => {
-            if (!isDownCaro) return;
-            isDownCaro = false;
-            isDraggingCaro = false;
-            container.style.cursor = 'grab';
-        });
-
-        window.addEventListener('pointercancel', () => {
-            if (!isDownCaro) return;
-            isDownCaro = false;
-            isDraggingCaro = false;
-            container.style.cursor = 'grab';
-        });
-
-        window.addEventListener('pointermove', (e) => {
-            if (!isDownCaro) return;
-            e.preventDefault();
-            const x = e.pageX;
-            const walk = (x - startXCaro) * 1.5; // Multiplier for drag sensitivity
-            currentTranslate = prevTranslate + walk;
-        });
-    }
-
     // --- Cursor Following Image Placeholder Logic ---
     const cursorPlaceholder = document.getElementById('cursor-placeholder');
     const cursorImage = document.getElementById('cursor-image');
@@ -653,78 +587,86 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Live-Save Logic (Ctrl+S) ---
+    // --- Live-Save Logic ---
+    function saveHTMLToServer() {
+        if (!isLocalhost) return;
+        
+        console.log("Saving changes to index.html...");
+        
+        const htmlClone = document.documentElement.cloneNode(true);
+        
+        const scripts = htmlClone.querySelectorAll('script');
+        scripts.forEach(script => {
+            if (script.innerHTML.includes('Code injected by live-server')) {
+                script.remove();
+            }
+        });
+
+        const fillChars = htmlClone.querySelectorAll('.fill-char');
+        fillChars.forEach(span => {
+            span.replaceWith(span.textContent);
+        });
+
+        const rollUpWords = htmlClone.querySelectorAll('.roll-up-word');
+        rollUpWords.forEach(span => {
+            span.replaceWith(span.textContent);
+        });
+
+        const animatedElements = htmlClone.querySelectorAll('#zoom-container, #sticky-section, .spring-switch-wrapper, #switch-cord, #dissolve-frame, #sequence-canvas, #cinematic-titles, .titles-heading, .titles-list li, #zoom-target, #monitor-screen, #static-canvas, #screen-video, #crt-overlay, #cycle-scroll-container, #cycle-sticky-section, #cycle-canvas');
+        animatedElements.forEach(el => {
+            el.removeAttribute('style');
+        });
+        
+        const monitorScreenClone = htmlClone.querySelector('#monitor-screen');
+        if (monitorScreenClone) monitorScreenClone.classList.remove('turning-on');
+        
+        const fixedNavClone = htmlClone.querySelector('#fixed-nav');
+        if (fixedNavClone) fixedNavClone.classList.remove('visible');
+        
+        const glassHeaderClone = htmlClone.querySelector('#glass-header');
+        if (glassHeaderClone) glassHeaderClone.classList.remove('visible');
+        
+        const fullHTML = '<!DOCTYPE html>\n<html lang="en">\n' + htmlClone.innerHTML + '\n</html>';
+
+        fetch('http://localhost:3000/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/html' },
+            body: fullHTML
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Successfully saved to index.html!");
+            } else {
+                console.error("Failed to save:", data.error);
+            }
+        })
+        .catch(err => console.error("Server error. Is node server.js running on port 3000?", err));
+    }
+
+    // Save on Ctrl+S
     window.addEventListener('keydown', (e) => {
-        if (!isLocalhost) return; // Completely disable save shortcut on Vercel
-
+        if (!isLocalhost) return;
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-            e.preventDefault(); // Prevent standard browser save dialog
-            
-            console.log("Saving changes to index.html...");
-            
-            // Clone document to safely strip injected scripts without modifying live DOM
-            const htmlClone = document.documentElement.cloneNode(true);
-            
-            // Remove live-server injected script (so it doesn't duplicate on save)
-            const scripts = htmlClone.querySelectorAll('script');
-            scripts.forEach(script => {
-                if (script.innerHTML.includes('Code injected by live-server')) {
-                    script.remove();
-                }
-            });
-
-            // Clean up dynamically injected animation spans so they don't get permanently saved into the code
-            const fillChars = htmlClone.querySelectorAll('.fill-char');
-            fillChars.forEach(span => {
-                span.replaceWith(span.textContent);
-            });
-
-            const rollUpWords = htmlClone.querySelectorAll('.roll-up-word');
-            rollUpWords.forEach(span => {
-                span.replaceWith(span.textContent);
-            });
-
-            // Clean up dynamically injected inline styles from scroll animations so they don't break the structure on reload
-            const animatedElements = htmlClone.querySelectorAll('#zoom-container, #sticky-section, .spring-switch-wrapper, #switch-cord, #dissolve-frame, #sequence-canvas, #cinematic-titles, .titles-heading, .titles-list li, #zoom-target, #monitor-screen, #static-canvas, #screen-video, #crt-overlay, .gallery-3d, #cycle-scroll-container, #cycle-sticky-section, #cycle-canvas');
-            animatedElements.forEach(el => {
-                el.removeAttribute('style');
-            });
-            
-            // Clean up dynamically added classes
-            const monitorScreenClone = htmlClone.querySelector('#monitor-screen');
-            if (monitorScreenClone) monitorScreenClone.classList.remove('turning-on');
-            
-            const fixedNavClone = htmlClone.querySelector('#fixed-nav');
-            if (fixedNavClone) fixedNavClone.classList.remove('visible');
-            
-            const glassHeaderClone = htmlClone.querySelector('#glass-header');
-            if (glassHeaderClone) glassHeaderClone.classList.remove('visible');
-            
-            // Reconstruct full HTML string
-            const fullHTML = '<!DOCTYPE html>\n<html lang="en">\n' + htmlClone.innerHTML + '\n</html>';
-
-            // Send to our local backend
-            fetch('http://localhost:3000/save', {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/html' },
-                body: fullHTML
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    console.log("Successfully saved to index.html!");
-                } else {
-                    console.error("Failed to save:", data.error);
-                }
-            })
-            .catch(err => console.error("Server error. Is node server.js running on port 3000?", err));
+            e.preventDefault();
+            saveHTMLToServer();
         }
+    });
+
+    // Auto-save immediately when text is edited
+    let autoSaveTimeout;
+    document.body.addEventListener('input', (e) => {
+        if (!isLocalhost) return;
+        clearTimeout(autoSaveTimeout);
+        autoSaveTimeout = setTimeout(() => {
+            saveHTMLToServer();
+        }, 1000); // 1s debounce to prevent spamming the local backend
     });
     // --- CYCLE ANIMATION LOGIC ---
     const cycleCanvas = document.getElementById('cycle-canvas');
     const cycleCtx = cycleCanvas ? cycleCanvas.getContext('2d') : null;
     const cycleScrollContainer = document.getElementById('cycle-scroll-container');
-    const CYCLE_FRAME_COUNT = 127;
+    const CYCLE_FRAME_COUNT = 145;
     const cycleImages = [];
     let cycleImagesLoaded = 0;
 
@@ -737,7 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 1; i <= CYCLE_FRAME_COUNT; i++) {
             const img = new Image();
             const frameIndex = i.toString().padStart(3, '0');
-            img.src = `images/cycle_ani/monitordisplay_20260426_184449_0000_${frameIndex}.png`;
+            img.src = `images/cycle_ani/video_20260429_093758_${frameIndex}.png`;
             img.onload = () => {
                 cycleImagesLoaded++;
                 // Draw first frame once loaded
@@ -749,6 +691,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let cycleTicking = false;
+        const cycleWords = document.querySelectorAll('.cycle-word');
+        
         window.addEventListener('scroll', () => {
             if (!isMonitorOn || !cycleScrollContainer) return;
 
@@ -767,21 +711,97 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (cycleCtx && cycleImages[frameIndex] && cycleImages[frameIndex].complete) {
                             cycleCtx.drawImage(cycleImages[frameIndex], 0, 0, cycleCanvas.width, cycleCanvas.height);
                         }
+                        
+                        // Reveal words based on progress (0 to 1)
+                        if (cycleWords.length === 3) {
+                            cycleWords[0].classList.toggle('visible', progress > 0.15);
+                            cycleWords[1].classList.toggle('visible', progress > 0.40);
+                            cycleWords[2].classList.toggle('visible', progress > 0.70);
+                        }
                     } else if (scrollDistance < 0) {
                         // Before container
                         if (cycleCtx && cycleImages[0] && cycleImages[0].complete) {
                             cycleCtx.drawImage(cycleImages[0], 0, 0, cycleCanvas.width, cycleCanvas.height);
                         }
+                        cycleWords.forEach(w => w.classList.remove('visible'));
                     } else if (scrollDistance > maxScroll) {
                         // After container
                         if (cycleCtx && cycleImages[CYCLE_FRAME_COUNT - 1] && cycleImages[CYCLE_FRAME_COUNT - 1].complete) {
                             cycleCtx.drawImage(cycleImages[CYCLE_FRAME_COUNT - 1], 0, 0, cycleCanvas.width, cycleCanvas.height);
                         }
+                        cycleWords.forEach(w => w.classList.add('visible'));
                     }
                     cycleTicking = false;
                 });
                 cycleTicking = true;
             }
         });
+    }
+
+    // --- TESTIMONIALS SCROLL-LINKED LOGIC ---
+    const rowTop = document.querySelector('.row-top');
+    const rowBottom = document.querySelector('.row-bottom');
+    let lastScrollY = window.scrollY;
+    let currentScrollTop = 0;
+    let currentScrollBottom = 0;
+    
+    window.addEventListener('scroll', () => {
+        if (!isMonitorOn || !rowTop || !rowBottom) return;
+        
+        const deltaY = window.scrollY - lastScrollY;
+        lastScrollY = window.scrollY;
+        
+        // Move top left, bottom right based on scroll delta
+        // Multiply by a factor for speed control (0.5 means half scroll speed)
+        currentScrollTop -= deltaY * 0.5;
+        currentScrollBottom += deltaY * 0.5;
+        
+        const blockWidthTop = rowTop.scrollWidth / 4;
+        const blockWidthBottom = rowBottom.scrollWidth / 4;
+        
+        // Wrap around seamlessly for top row (moving left generally)
+        if (Math.abs(currentScrollTop) >= blockWidthTop) {
+            currentScrollTop = currentScrollTop % blockWidthTop;
+        }
+        if (currentScrollTop > 0) {
+            currentScrollTop = (currentScrollTop % blockWidthTop) - blockWidthTop;
+        }
+        
+        // Wrap around seamlessly for bottom row (moving right generally)
+        if (currentScrollBottom >= blockWidthBottom) {
+            currentScrollBottom = currentScrollBottom % blockWidthBottom;
+        } else if (currentScrollBottom < 0) {
+            currentScrollBottom = (currentScrollBottom % blockWidthBottom) + blockWidthBottom;
+        }
+        
+        rowTop.style.transform = 'translateX(' + currentScrollTop + 'px)';
+        rowBottom.style.transform = 'translateX(' + (currentScrollBottom - blockWidthBottom) + 'px)';
+    });
+
+    
+    
+    // --- MOTTO CONTINUOUS SLIDER LOGIC ---
+    const mottoSliderTrack = document.getElementById('motto-slider-track');
+    let mottoScrollPos = 0;
+    
+    function animateMottoSlider() {
+        if (mottoSliderTrack) {
+            // Adjust speed here. Using 0.8 to make it smooth but continuous.
+            mottoScrollPos -= 0.8;
+            
+            const halfWidth = mottoSliderTrack.scrollWidth / 2;
+            
+            if (Math.abs(mottoScrollPos) >= halfWidth && halfWidth > 0) {
+                mottoScrollPos = 0;
+            }
+            
+            mottoSliderTrack.style.transform = 'translateX(' + mottoScrollPos + 'px)';
+        }
+        requestAnimationFrame(animateMottoSlider);
+    }
+    
+    // Start animation if elements exist
+    if (mottoSliderTrack) {
+        animateMottoSlider();
     }
 });

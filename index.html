@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixcross - Design Agency</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-</head>
+<style type="text/css"></style></head>
 
 <body spellcheck="false">
     <!-- Glassy Blur Header (appears after hero) -->
@@ -28,18 +27,18 @@
                 <!-- Green Container Image Placeholder -->
                 <div class="image-placeholder-new" id="hero-placeholder-new">
                     <div class="hero-image-new"></div>
-                    <h1 class="hero-title-new">PIXCROSS</h1>
+                    <h1 class="hero-title-new">pixcross</h1>
                 </div>
 
                 <!-- Two Long Buttons -->
                 <div class="hero-buttons-new">
-                    <button class="btn-new btn-dark-new"><span class="btn-text-new">View Our Work</span></button>
-                    <button class="btn-new btn-light-new"><span class="btn-text-new">Let's Talk</span></button>
+                    <button class="btn-new btn-dark-new"><span class="btn-text-new">see our work</span></button>
+                    <button class="btn-new btn-light-new"><span class="btn-text-new">let's talk</span></button>
                 </div>
 
                 <!-- Logos Carousel -->
                 <div class="trusted-section-new">
-                    <p class="trusted-text-new">Trusted by</p>
+                    <p class="trusted-text-new">trusted by</p>
                     <div class="carousel-wrapper-new">
                         <div class="carousel-container-new">
                             <div class="carousel-track-new">
@@ -69,28 +68,64 @@
             </div>
         </section>
 
-        <!-- NEW MOTTO SECTION -->
-        <section class="motto-new" id="motto-new">
+        <!-- DISABLED MOTTO SECTION -->
+        <section class="motto-new" id="motto-new" style="display: none !important;">
             <div class="motto-container-new">
                 <!-- Left: Green Square Placeholder -->
                 <div class="motto-left-new">
-                    <div class="motto-placeholder-new">
+                    <div class="motto-placeholder-new visible">
                         <img src="images/deskman.png" alt="Deskman" class="motto-image-new">
                     </div>
                 </div>
 
                 <!-- Right: Content -->
                 <div class="motto-right-new">
-                    <h2 class="motto-title-new">
-                        <span class="line1">DESIGNING</span>
-                        <span class="line2">EVERY PIXEL<span class="exclamation">!</span></span>
+                    <h2 class="motto-title-new visible">
+                        <span class="line1">designing</span>
+                        <span class="line2">every pixel<span class="exclamation">!</span></span>
                     </h2>
 
                     <div class="motto-footer-new">
                         <p class="motto-text-new">every move is calculated,<br>every pixel has purpose.</p>
-                        <button class="btn-new btn-light-new motto-btn-new"><span style="color: var(--dark); font-weight: 800;">Let's Talk</span></button>
+                        <button class="btn-new btn-light-new motto-btn-new"><span style="color: var(--dark); font-weight: 800;">let's talk</span></button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- OUR WORK CAROUSEL SECTION -->
+        <section class="our-work-section" id="our-work-section">
+            <h2 class="our-work-title">designing every pixel</h2>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-oval top-oval"></div>
+                
+                <div class="work-carousel-container">
+                    <div class="work-carousel-track">
+                        <!-- Set 1 -->
+                        <div class="carousel-item"><img src="images/caropics/1.jpeg" alt="Work 1"></div>
+                        <div class="carousel-item"><img src="images/caropics/2.jpeg" alt="Work 2"></div>
+                        <div class="carousel-item"><img src="images/caropics/3.png" alt="Work 3"></div>
+                        <div class="carousel-item"><img src="images/caropics/4.jpeg" alt="Work 4"></div>
+                        <div class="carousel-item"><img src="images/caropics/5.jpeg" alt="Work 5"></div>
+                        <!-- Set 2 -->
+                        <div class="carousel-item"><img src="images/caropics/1.jpeg" alt="Work 1"></div>
+                        <div class="carousel-item"><img src="images/caropics/2.jpeg" alt="Work 2"></div>
+                        <div class="carousel-item"><img src="images/caropics/3.png" alt="Work 3"></div>
+                        <div class="carousel-item"><img src="images/caropics/4.jpeg" alt="Work 4"></div>
+                        <div class="carousel-item"><img src="images/caropics/5.jpeg" alt="Work 5"></div>
+                    </div>
+                </div>
+
+                <div class="carousel-oval bottom-oval"></div>
+                <!-- Edge Fades -->
+                <div class="work-fade-left"></div>
+                <div class="work-fade-right"></div>
+            </div>
+
+            <div class="our-work-footer">
+                <p class="our-work-text">every move is calculated,<br>every pixel has purpose.</p>
+                <button class="btn-new btn-light-new motto-btn-new"><span style="color: var(--dark); font-weight: 800;">let's talk</span></button>
             </div>
         </section>
 
@@ -105,21 +140,19 @@
                             <div class="switch-handle" id="switch-handle">
                                 <!-- Inverted round cornered triangle -->
                                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2 L22 20 L2 20 Z" fill="#d2f003" stroke="#d2f003" stroke-width="4"
-                                        stroke-linejoin="round"></path>
+                                    <path d="M12 2 L22 20 L2 20 Z" fill="#d2f003" stroke="#d2f003" stroke-width="4" stroke-linejoin="round"></path>
                                 </svg>
                             </div>
                         </div>
                     </div>
                     <!-- Vertical Stack Text -->
                     <div class="vertical-switch-text">
-                        pull<br>the<br>switch<br>&scroll<br>to<br>turn<br>on<br>our<br>channel
+                        pull<br>the<br>switch<br>&amp;scroll<br>to<br>enter<br>our<br>channel
                     </div>
                 </div>
 
                 <!-- Final Dissolve Frame Layer (Fixed to Viewport) -->
-                <img src="images/dissolveframe.png" alt="Final Frame" class="dissolve-frame" id="dissolve-frame"
-                    draggable="false">
+                <img src="images/dissolveframe.png" alt="Final Frame" class="dissolve-frame" id="dissolve-frame" draggable="false">
 
                 <!-- Image Sequence Animation Canvas -->
                 <canvas id="sequence-canvas" class="sequence-canvas" width="1920" height="1080"></canvas>
@@ -155,42 +188,248 @@
         </div>
 
 
-        <!-- New 3D Gallery Section -->
-        <section class="gallery-3d" id="gallery-3d">
-            <h2 class="gallery-title">our gallery</h2>
-            <div class="gallery-tunnel"><img src="images/caropics/1.jpeg" alt="Work" class="tunnel-image left-side"
-                    style="--index: 1; --random-x: 2rem;" draggable="false">
-                <img src="images/caropics/2.jpeg" alt="Work" class="tunnel-image right-side"
-                    style="--index: 2; --random-x: -3rem;" draggable="false">
-                <img src="images/caropics/3.png" alt="Work" class="tunnel-image left-side"
-                    style="--index: 3; --random-x: -1rem;" draggable="false">
-                <img src="images/caropics/4.jpeg" alt="Work" class="tunnel-image right-side"
-                    style="--index: 4; --random-x: 4rem;" draggable="false">
-                <img src="images/caropics/5.jpeg" alt="Work" class="tunnel-image left-side"
-                    style="--index: 5; --random-x: 3rem;" draggable="false">
-                <img src="images/caropics/1.jpeg" alt="Work" class="tunnel-image right-side"
-                    style="--index: 6; --random-x: -2rem;" draggable="false">
-                <img src="images/caropics/2.jpeg" alt="Work" class="tunnel-image left-side"
-                    style="--index: 7; --random-x: -4rem;" draggable="false">
-                <img src="images/caropics/3.png" alt="Work" class="tunnel-image right-side"
-                    style="--index: 8; --random-x: 1rem;" draggable="false">
-                <img src="images/caropics/4.jpeg" alt="Work" class="tunnel-image left-side"
-                    style="--index: 9; --random-x: 5rem;" draggable="false">
-                <img src="images/caropics/5.jpeg" alt="Work" class="tunnel-image right-side"
-                    style="--index: 10; --random-x: -5rem;" draggable="false">
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <!-- Heading -->
+            <div class="testimonials-header">
+                <p class="tag">what they said</p>
+                <h2>designs that speak. results that stay.</h2>
+            </div>
+
+            <!-- SCROLL LAYERS -->
+            <div class="testimonial-wrapper">
+                <!-- TOP ROW -->
+                <div class="testimonial-row row-top">
+                    <!-- Original -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                    <!-- Clones Block 1 -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                    <!-- Clones Block 2 -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                    <!-- Clones Block 3 -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                </div>
+
+                <!-- BOTTOM ROW -->
+                <div class="testimonial-row row-bottom">
+                    <!-- Original -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <!-- Clones Block 1 -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <!-- Clones Block 2 -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <!-- Clones Block 3 -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                </div>
             </div>
         </section>
+
+
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" style="display: none;">
+            <!-- Heading -->
+            <div class="testimonials-header">
+                <p class="tag">our testimonials</p>
+                <h2>designs that speak. results that stay.</h2>
+            </div>
+
+            <!-- SCROLL LAYERS -->
+            <div class="testimonial-wrapper">
+                <!-- TOP ROW -->
+                <div class="testimonial-row row-top">
+                    <!-- Original -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                    <!-- Clones Block 1 -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                    <!-- Clones Block 2 -->
+                    <div class="testimonial-card">Touch feels natural — almost like the design reads your
+                        mind.<br><span>— Elena Rossi</span></div>
+                    <div class="testimonial-card">Clean, modern, and exactly what we needed.<br><span>— Rahul
+                            Mehta</span></div>
+                    <div class="testimonial-card">The branding elevated our entire presence.<br><span>— Sarah Kim</span>
+                    </div>
+                    <div class="testimonial-card">Every detail felt intentional.<br><span>— Arjun Nair</span></div>
+                    <div class="testimonial-card">Their approach to UI is completely fresh.<br><span>— Maria
+                            Gonzalez</span></div>
+                    <div class="testimonial-card">We saw our conversions double instantly.<br><span>— Wei Chen</span>
+                    </div>
+                    <div class="testimonial-card">An absolute pleasure to collaborate with.<br><span>— James
+                            O'Connor</span></div>
+                </div>
+
+                <!-- BOTTOM ROW -->
+                <div class="testimonial-row row-bottom">
+                    <!-- Original -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <!-- Clones Block 1 -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <!-- Clones Block 2 -->
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                    <div class="testimonial-card">Minimal yet powerful design language.<br><span>— Ayaan Khan</span>
+                    </div>
+                    <div class="testimonial-card">They truly understand branding.<br><span>— Maya Jensen</span></div>
+                    <div class="testimonial-card">It just works beautifully across everything.<br><span>— Daniel
+                            Krüger</span></div>
+                    <div class="testimonial-card">We saw instant engagement improvement.<br><span>— Priya Shah</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- New Cycle Animation Scroll Section -->
         <div class="cycle-scroll-container" id="cycle-scroll-container">
             <section class="cycle-sticky-section" id="cycle-sticky-section">
+                <!-- Cycle Text Overlay -->
+                <div class="cycle-text-overlay" id="cycle-text-overlay">
+                    <span class="cycle-word">DEFINE.</span>
+                    <span class="cycle-word">DESIGN.</span>
+                    <span class="cycle-word">DELIVER.</span>
+                </div>
+
                 <!-- Cycle Image Sequence Canvas -->
-                <canvas id="cycle-canvas" class="cycle-canvas"></canvas>
+                <canvas id="cycle-canvas" class="cycle-canvas" width="1920" height="1080"></canvas>
             </section>
         </div>
 
         <!-- Cursor Following Image Placeholder -->
-        <div id="cursor-placeholder" class="cursor-placeholder" style="left: 203px; top: 209px;">
+        <div id="cursor-placeholder" class="cursor-placeholder" style="left: 1281px; top: 336px;">
             <img src="images/works/c2.jpeg" alt="Work Preview" id="cursor-image">&nbsp; &nbsp;
         </div>
     </main>
@@ -485,7 +724,8 @@
     </script>
 
 
-</body>
+
 <div id="detach-button-host" style="top: 0px; left: 698px;"></div>
 
+</body>
 </html>
